@@ -61,6 +61,24 @@ class ExpertSenderApiConnection
     }
 
     /**
+     * DELETE method
+     * @param $method
+     * @param array $data
+     * @return array
+     */
+    public function delete($method, array $data)
+    {
+        $data['apiKey'] = $this->key;
+
+        $response = $this->httpClient->request('DELETE', $method, [
+            'query' => $data,
+            'http_errors' => false,
+        ]);
+
+        return ['code' => $response->getStatusCode()];
+    }
+
+    /**
      * Add child SimpleXMLElement to parent SimpleXMLElement
      *
      * @param \SimpleXMLElement $parent

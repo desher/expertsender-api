@@ -44,6 +44,21 @@ class Subscribers extends AbstractMethod
     }
 
     /**
+     * Delete subscriber from list
+     * @param $email
+     * @param $listId
+     * @return bool
+     */
+    public function delete($email, $listId)
+    {
+        $result = $this->connection->delete('Subscribers', [
+            'email' => $email,
+            'listId' => $listId,
+        ]);
+        return $result['code'] === 204;
+    }
+
+    /**
      * Return xml-object with subscriber data (for send to save method)
      * @param mappers\Subscriber $subscriber
      * @param $listId
