@@ -2,8 +2,7 @@
 
 namespace desher\expertsender\methods;
 
-use desher\expertsender\mappers;
-use yii\base\Exception;
+use Exception;
 
 class Tables extends AbstractMethod
 {
@@ -95,5 +94,16 @@ class Tables extends AbstractMethod
         }
 
         return $xml;
+    }
+
+    /**
+     * Clear a table
+     * @param $tableName
+     * @return bool
+     */
+    public function truncateTable($tableName)
+    {
+        $result = $this->connection->post('DataTablesClearTable', $this->getRowXml($tableName, []));
+        return $result['code'] === 204;
     }
 }
